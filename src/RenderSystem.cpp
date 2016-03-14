@@ -32,11 +32,15 @@ void RenderSystem::postUpdate() {
 			auto &render = m_manager.getComponent<RenderComponent>(e);
 			auto &position = m_manager.getComponent<PositionComponent>(e);
 
-			std::unique_ptr<sf::Sprite> _sprite;
+			sf::Sprite _sprite;
+			//std::unique_ptr<sf::Sprite> _sprite;
 
-			_sprite->setTexture(*render.texture);
-			_sprite->setPosition(position.position);
+			_sprite.setTexture(*render.texture);
+			//_sprite->setTexture(*render.texture);
+			_sprite.setPosition(position.position);
+			//_sprite->setPosition(position.position);
 
-			m_target.draw(*_sprite);
+			m_target.draw(_sprite);
+			//m_target.draw(*_sprite);
 		}
 }

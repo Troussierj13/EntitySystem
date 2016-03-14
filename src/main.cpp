@@ -10,12 +10,11 @@
 #include "PlayState.hpp"
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "GreedyMonkey");
+	sf::RenderWindow window(sf::VideoMode::getFullscreenModes()[0], "GreedyMonkey", sf::Style::Fullscreen);
 	storm::state::StateManager states;
 
 	states.requestPush<PlayState>( window);
 
-	//boucle principale
 	while(window.isOpen()) {
 		states.executeRequests();
 
@@ -26,7 +25,7 @@ int main() {
 
 			states.top<State>().handleEvent(event);
 		}
-		states.update(); // c'est ici que le jeu est calculer
+		states.update();
 
 		window.clear(sf::Color::White);
 		states.render();

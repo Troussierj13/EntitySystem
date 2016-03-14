@@ -9,7 +9,7 @@
 
 namespace Textures
 {
-	enum ID { Projectile };
+	enum ID { Banane };
 }
 
 namespace Fonts

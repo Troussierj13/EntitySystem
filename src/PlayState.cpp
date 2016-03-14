@@ -11,14 +11,11 @@ PlayState::PlayState(storm::state::StateManager &parent, sf::RenderTarget &targe
 	rect.setPosition({80,150});
 	rect.setSize({50,50});
 
-	m_texturesHolder.load(Textures::Projectile, "../assets/proj.png");
+	m_texturesHolder.load(Textures::Banane, "../assets/banane.png");
 
 	m_entityManager.addSystem<RenderSystem>(*m_target);
 
-	makeProjectile(m_entityManager, m_texturesHolder.get(Textures::Projectile), 15, {300, 300});
-	makeProjectile(m_entityManager, m_texturesHolder.get(Textures::Projectile), 15, {400, 200});
-	makeProjectile(m_entityManager, m_texturesHolder.get(Textures::Projectile), 15, {200, 400});
-	makeProjectile(m_entityManager, m_texturesHolder.get(Textures::Projectile), 15, {500, 500});
+	makeProjectile(m_entityManager, m_texturesHolder.get(Textures::Banane), 0.f, {300, 300});
 }
 
 void PlayState::pause() {
@@ -35,10 +32,13 @@ void PlayState::handleEvent(const sf::Event &event) {
 
 void PlayState::update(float delta) {
 	m_entityManager.updateSystems(delta);
+
+	if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+		makeProjectile(m_entityManager, m_texturesHolder.get(Textures::Banane), 0.f, sf::Vector2f(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y));
 }
 
 void PlayState::render() {
 	//m_target->draw(rect);
 
-	//m_entityManager.postUpdateSystems();
+	m_entityManager.postUpdateSystems();
 }
